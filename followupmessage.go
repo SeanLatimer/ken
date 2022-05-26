@@ -28,7 +28,7 @@ func (m *FollowUpMessage) Edit(data *discordgo.WebhookEdit) (err error) {
 		return
 	}
 
-	inter, err := m.s.FollowupMessageEdit(m.self.ID, m.i, m.ID, data)
+	inter, err := m.s.FollowupMessageEdit(m.i, m.ID, data)
 	if err != nil {
 		return
 	}
@@ -53,7 +53,7 @@ func (m *FollowUpMessage) Delete() (err error) {
 		return
 	}
 
-	err = m.s.FollowupMessageDelete(m.self.ID, m.i, m.ID)
+	err = m.s.FollowupMessageDelete(m.i, m.ID)
 	return
 }
 

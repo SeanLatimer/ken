@@ -87,11 +87,7 @@ func (c *Ctx) Respond(r *discordgo.InteractionResponse) (err error) {
 		if r == nil || r.Data == nil {
 			return
 		}
-		var self *discordgo.User
-		if self, err = c.Ken.opt.State.SelfUser(c.Session); err != nil {
-			return
-		}
-		_, err = c.Session.InteractionResponseEdit(self.ID, c.Event.Interaction, &discordgo.WebhookEdit{
+		_, err = c.Session.InteractionResponseEdit(c.Event.Interaction, &discordgo.WebhookEdit{
 			Content:         r.Data.Content,
 			Embeds:          r.Data.Embeds,
 			Components:      r.Data.Components,
@@ -152,7 +148,7 @@ func (c *Ctx) FollowUp(wait bool, data *discordgo.WebhookParams) (fum *FollowUpM
 	if fum.Error != nil {
 		return
 	}
-	fum.Message, fum.Error = c.Session.FollowupMessageCreate(fum.self.ID, c.Event.Interaction, wait, data)
+	fum.Message, fum.Error = c.Session.FollowupMessageCreate(c.Event.Interaction, wait, data)
 	return
 }
 
